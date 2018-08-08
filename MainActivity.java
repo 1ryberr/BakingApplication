@@ -17,8 +17,6 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
         new BakingRecipeQueryTask().execute(NetworkUtils.buildUrl());
 
     }
-
-
 
     public class BakingRecipeQueryTask extends AsyncTask<URL, Void, String> {
 
@@ -67,8 +63,10 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String recipeResults) {
             // mLoadingIndicator.setVisibility(View.INVISIBLE);
 
+            Recipe recipe = JsonUtils.parseRecipeJson(recipeResults);
+
             if ( recipeResults != null && ! recipeResults.equals("")) {
-               Log.v(TAG,JsonUtils.parseRecipeJson(recipeResults).toString());
+               Log.v(TAG,recipe.getIngredients().get(2).getIngredient());
 
             }
 
