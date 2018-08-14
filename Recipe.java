@@ -6,21 +6,13 @@ public class Recipe {
 
     private int id;
     private String name;
-    private ArrayList<Ingredients> ingredients;
-    private ArrayList<Steps> steps;
+    private String ingredients;
+    private String steps;
 
-    public Recipe(int id, String name, ArrayList<Ingredients>  ingredients, ArrayList<Steps> steps ) {
+    public Recipe(int id, String name, String ingredients, String steps ) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
-        this.steps = steps;
-    }
-
-    public ArrayList<Steps> getSteps() {
-        return steps;
-    }
-
-    public void setSteps(ArrayList<Steps> steps) {
         this.steps = steps;
     }
 
@@ -41,12 +33,20 @@ public class Recipe {
         this.name = name;
     }
 
-    public ArrayList<Ingredients>  getIngredients() {
+    public String getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(ArrayList<Ingredients>  ingredients) {
+    public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public String getSteps() {
+        return steps;
+    }
+
+    public void setSteps(String steps) {
+        this.steps = steps;
     }
 }
 
