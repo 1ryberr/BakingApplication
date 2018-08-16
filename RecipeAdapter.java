@@ -1,22 +1,16 @@
 package com.example.ryanberry.bakingapplication;
+import com.example.ryanberry.bakingapplication.model.Recipe;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.example.ryanberry.bakingapplication.model.Recipe;
-
 import java.util.ArrayList;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdapterViewHolder> {
     private static final String TAG = "RecipeAdapter";
     ArrayList<Recipe> recipes = new ArrayList<>();
-
 
     public RecipeAdapter(ArrayList<Recipe> recipes) {
         this.recipes = recipes;
