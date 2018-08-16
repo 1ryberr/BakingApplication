@@ -1,4 +1,4 @@
-package com.example.ryanberry.bakingapplication;
+package com.example.ryanberry.bakingapplication.model;
 
 public class Ingredients {
    private int quantity;

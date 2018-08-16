@@ -1,17 +1,12 @@
 package com.example.ryanberry.bakingapplication.utilities;
 
 import android.util.Log;
-
-import com.example.ryanberry.bakingapplication.Ingredients;
-import com.example.ryanberry.bakingapplication.Recipe;
-import com.example.ryanberry.bakingapplication.Steps;
-
+import com.example.ryanberry.bakingapplication.model.Ingredients;
+import com.example.ryanberry.bakingapplication.model.Recipe;
+import com.example.ryanberry.bakingapplication.model.Steps;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class JsonUtils {
     private static final String TAG = "JsonUtils";
@@ -52,7 +47,9 @@ public class JsonUtils {
         String measure;
         String ingredient;
         int quantity;
+
         ingredientsArray = new JSONArray(ingredients);
+
         for (int g = 0; g < ingredientsArray.length(); g++) {
             measure = ingredientsArray.getJSONObject(g).getString("measure");
             ingredient = ingredientsArray.getJSONObject(g).getString("ingredient");
@@ -72,7 +69,6 @@ public class JsonUtils {
         String videoURL = null;
         String thumbnailURL = null;
         String description = null;
-
 
         stepArray = new JSONArray(steps);
 
