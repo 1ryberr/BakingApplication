@@ -43,6 +43,7 @@ public class RecipeCardFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+
         return rootView;
 
     }
