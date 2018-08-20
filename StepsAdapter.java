@@ -7,10 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.example.ryanberry.bakingapplication.model.Recipe;
 import com.example.ryanberry.bakingapplication.model.Steps;
-
 import java.util.ArrayList;
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapterViewHolder> {

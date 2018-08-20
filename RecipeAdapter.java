@@ -1,7 +1,6 @@
 package com.example.ryanberry.bakingapplication;
 
 import com.example.ryanberry.bakingapplication.model.Recipe;
-
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

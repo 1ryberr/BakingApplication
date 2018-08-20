@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.ryanberry.bakingapplication.model.Recipe;
-import com.example.ryanberry.bakingapplication.model.Steps;
 import com.example.ryanberry.bakingapplication.utilities.JsonUtils;
 import com.example.ryanberry.bakingapplication.utilities.NetworkUtils;
 import java.io.IOException;
@@ -26,8 +25,7 @@ import java.util.ArrayList;
 
 public class RecipeCardFragment extends Fragment {
 
-    ArrayList<Recipe> recipe = new ArrayList<>();
-    ArrayList<Steps> stepArray = new ArrayList<>();
+    private ArrayList<Recipe> recipe = new ArrayList<>();
     private static final String TAG = "RecipeCardFragment";
     private RecyclerView recyclerView;
     private RecipeAdapter recipeAdapter;
@@ -123,14 +121,8 @@ public class RecipeCardFragment extends Fragment {
                         @Override
                         public void onListItemClick(int clickedItemIndex) {
                             String steps = recipe.get(clickedItemIndex).getSteps();
-
-                            stepArray = JsonUtils.parseStepsJson(steps);
-
-                            System.out.println(recipe.get(clickedItemIndex).getIngredients());
                             Intent intent = new Intent(getActivity(), StepsActivity.class);
-
                             intent.putExtra("stepsArray", steps);
-
                             startActivity(intent);
                         }
                     });
