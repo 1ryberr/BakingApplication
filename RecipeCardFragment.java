@@ -1,6 +1,10 @@
 package com.example.ryanberry.bakingapplication;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,11 +15,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.ryanberry.bakingapplication.model.Recipe;
+import com.example.ryanberry.bakingapplication.model.Steps;
 import com.example.ryanberry.bakingapplication.utilities.JsonUtils;
 import com.example.ryanberry.bakingapplication.utilities.NetworkUtils;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ import java.util.ArrayList;
 public class RecipeCardFragment extends Fragment {
 
     ArrayList<Recipe> recipe = new ArrayList<>();
+    ArrayList<Steps> stepArray = new ArrayList<>();
     private static final String TAG = "RecipeCardFragment";
     private RecyclerView recyclerView;
     private RecipeAdapter recipeAdapter;
@@ -37,16 +41,40 @@ public class RecipeCardFragment extends Fragment {
 
                              Bundle savedInstanceState) {
 
-        new BakingRecipeQueryTask().execute(NetworkUtils.buildUrl());
-        final View  rootView = inflater.inflate(R.layout.fragment_recipe_card, container, false);
+
+        if (isOnline()) {
+            new BakingRecipeQueryTask().execute(NetworkUtils.buildUrl());
+        } else {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            builder.setTitle("Network Error");
+            //  builder.setMessage(R.string.error_message);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    getActivity().finish();
+                }
+            });
+            builder.show();
+        }
+
+        final View rootView = inflater.inflate(R.layout.fragment_recipe_card, container, false);
         recyclerView = rootView.findViewById(R.id.recycle_card);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-
         return rootView;
 
     }
+
+
+    public boolean isOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
+    }
+
 
     public class BakingRecipeQueryTask extends AsyncTask<URL, Void, String> {
 
@@ -90,8 +118,26 @@ public class RecipeCardFragment extends Fragment {
 
             if (recipeResults != null && !recipeResults.equals("")) {
                 for (int i = 0; i < recipe.size(); i++) {
-                    recipeAdapter = new RecipeAdapter(recipe);
+
+                    recipeAdapter = new RecipeAdapter(recipe, new RecipeAdapter.ListItemClickedListener() {
+                        @Override
+                        public void onListItemClick(int clickedItemIndex) {
+                            String steps = recipe.get(clickedItemIndex).getSteps();
+
+                            stepArray = JsonUtils.parseStepsJson(steps);
+
+                            System.out.println(recipe.get(clickedItemIndex).getIngredients());
+                            Intent intent = new Intent(getActivity(), StepsActivity.class);
+
+                            intent.putExtra("stepsArray", steps);
+
+                            startActivity(intent);
+                        }
+                    });
+
                     recyclerView.setAdapter(recipeAdapter);
+
+
                 }
 
             }
