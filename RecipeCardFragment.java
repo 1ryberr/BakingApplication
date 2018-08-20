@@ -55,7 +55,6 @@ public class RecipeCardFragment extends Fragment {
             });
             builder.show();
         }
-
         final View rootView = inflater.inflate(R.layout.fragment_recipe_card, container, false);
         recyclerView = rootView.findViewById(R.id.recycle_card);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -64,6 +63,7 @@ public class RecipeCardFragment extends Fragment {
         return rootView;
 
     }
+
 
 
     public boolean isOnline() {
@@ -115,14 +115,15 @@ public class RecipeCardFragment extends Fragment {
             recipe = JsonUtils.parseRecipeJson(recipeResults);
 
             if (recipeResults != null && !recipeResults.equals("")) {
-                for (int i = 0; i < recipe.size(); i++) {
 
+                for (int i = 0; i < recipe.size(); i++) {
                     recipeAdapter = new RecipeAdapter(recipe, new RecipeAdapter.ListItemClickedListener() {
                         @Override
                         public void onListItemClick(int clickedItemIndex) {
                             String steps = recipe.get(clickedItemIndex).getSteps();
                             Intent intent = new Intent(getActivity(), StepsActivity.class);
                             intent.putExtra("stepsArray", steps);
+                            intent.putExtra("name",recipe.get(clickedItemIndex).getName());
                             startActivity(intent);
                         }
                     });

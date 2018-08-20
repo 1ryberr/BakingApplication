@@ -2,8 +2,10 @@ package com.example.ryanberry.bakingapplication;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,9 @@ public class StepsActivityFragment extends Fragment {
     private StepsAdapter stepsAdapter;
     private String stepArray;
     private ArrayList<Steps> steps;
+    private Toolbar toolbar;
+    private String recipeName;
+    private CardView cardView;
 
     public StepsActivityFragment() {
     }
@@ -28,8 +33,11 @@ public class StepsActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         stepArray = getActivity().getIntent().getExtras().getString("stepsArray");
+        recipeName = getActivity().getIntent().getExtras().getString("name");
         steps = JsonUtils.parseStepsJson(stepArray);
         final View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
+        getActivity().setTitle(recipeName);
+        cardView = (CardView) rootView.findViewById(R.id.step_card_card);
         recyclerView = rootView.findViewById(R.id.step_card);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -41,7 +49,12 @@ public class StepsActivityFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(stepsAdapter);
-
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(" This is a good program");
+            }
+        });
         return rootView;
     }
 }

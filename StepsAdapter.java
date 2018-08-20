@@ -27,6 +27,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
 
     @Override
     public StepsAdapter.StepsAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.step_card_item, parent, false);
         StepsAdapter.StepsAdapterViewHolder viewHolder = new StepsAdapter.StepsAdapterViewHolder(view);
@@ -59,11 +60,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
         public void onClick(View v) {
             int clickedPosition = getAdapterPosition();
             mOnClickListener.onListItemClick(clickedPosition);
-
         }
     }
-
-
-
 
 }
