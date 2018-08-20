@@ -1,5 +1,6 @@
 package com.example.ryanberry.bakingapplication;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -24,7 +25,7 @@ public class StepsActivityFragment extends Fragment {
     private Toolbar toolbar;
     private String recipeName;
     private CardView cardView;
-
+    private String ingredients;
     public StepsActivityFragment() {
     }
 
@@ -34,6 +35,7 @@ public class StepsActivityFragment extends Fragment {
 
         stepArray = getActivity().getIntent().getExtras().getString("stepsArray");
         recipeName = getActivity().getIntent().getExtras().getString("name");
+       ingredients = getActivity().getIntent().getExtras().getString("ingredients");
         steps = JsonUtils.parseStepsJson(stepArray);
         final View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
         getActivity().setTitle(recipeName);
@@ -45,6 +47,10 @@ public class StepsActivityFragment extends Fragment {
         stepsAdapter = new StepsAdapter(steps, new ListItemClickedListener() {
             @Override
             public void onListItemClick(int clickedItemIndex) {
+//                Intent intent = new Intent(getActivity(), StepsActivity.class);
+//
+//                startActivity(intent);
+
              System.out.println(" This is a good program");
             }
         });
@@ -52,7 +58,11 @@ public class StepsActivityFragment extends Fragment {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(" This is a good program");
+
+                Intent intent = new Intent(getActivity(), IngredientsActivity.class);
+                intent.putExtra("ingredients", ingredients);
+                startActivity(intent);
+
             }
         });
         return rootView;

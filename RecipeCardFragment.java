@@ -121,9 +121,13 @@ public class RecipeCardFragment extends Fragment {
                         @Override
                         public void onListItemClick(int clickedItemIndex) {
                             String steps = recipe.get(clickedItemIndex).getSteps();
+                            String ingredients = recipe.get(clickedItemIndex).getIngredients();
+                            String name = recipe.get(clickedItemIndex).getName();
+
                             Intent intent = new Intent(getActivity(), StepsActivity.class);
                             intent.putExtra("stepsArray", steps);
-                            intent.putExtra("name",recipe.get(clickedItemIndex).getName());
+                            intent.putExtra("name", name);
+                            intent.putExtra("ingredients", ingredients);
                             startActivity(intent);
                         }
                     });
