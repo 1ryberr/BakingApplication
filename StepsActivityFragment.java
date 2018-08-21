@@ -35,7 +35,7 @@ public class StepsActivityFragment extends Fragment {
 
         stepArray = getActivity().getIntent().getExtras().getString("stepsArray");
         recipeName = getActivity().getIntent().getExtras().getString("name");
-       ingredients = getActivity().getIntent().getExtras().getString("ingredients");
+        ingredients = getActivity().getIntent().getExtras().getString("ingredients");
         steps = JsonUtils.parseStepsJson(stepArray);
         final View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
         getActivity().setTitle(recipeName);
@@ -47,9 +47,10 @@ public class StepsActivityFragment extends Fragment {
         stepsAdapter = new StepsAdapter(steps, new ListItemClickedListener() {
             @Override
             public void onListItemClick(int clickedItemIndex) {
-//                Intent intent = new Intent(getActivity(), StepsActivity.class);
-//                startActivity(intent);
-//
+                Intent intent = new Intent(getActivity(), StepsAndVideoActivity.class);
+                intent.putExtra("description", steps.get(clickedItemIndex).getDescription());
+                startActivity(intent);
+
             System.out.println(steps.get(clickedItemIndex).getThumbnailURL());
              System.out.println(steps.get(clickedItemIndex).getVideoURL());
              System.out.println(steps.get(clickedItemIndex).getDescription());
