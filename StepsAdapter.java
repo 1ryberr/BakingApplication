@@ -36,7 +36,10 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
 
     @Override
     public void onBindViewHolder(@NonNull StepsAdapterViewHolder holder, int position) {
-        holder.recipeLabel.setText(steps.get(position).getShortDescription());
+
+        holder.stepLabel.setText(steps.get(position).getShortDescription());
+        holder.number.setText(String.valueOf(steps.get(position).getId() + 1));
+
     }
 
 
@@ -46,12 +49,14 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
     }
 
     class StepsAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
-        TextView recipeLabel;
+        TextView stepLabel;
+        TextView  number;
         CardView cardView;
 
         public StepsAdapterViewHolder(View itemView) {
             super(itemView);
-            recipeLabel = (TextView) itemView.findViewById(R.id.step_name);
+            stepLabel = (TextView) itemView.findViewById(R.id.step_name);
+            number =(TextView) itemView.findViewById(R.id.number);
             cardView = (CardView) itemView.findViewById(R.id.step_card);
             itemView.setOnClickListener(this);
         }

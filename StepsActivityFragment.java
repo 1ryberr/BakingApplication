@@ -48,10 +48,11 @@ public class StepsActivityFragment extends Fragment {
             @Override
             public void onListItemClick(int clickedItemIndex) {
 //                Intent intent = new Intent(getActivity(), StepsActivity.class);
-//
 //                startActivity(intent);
-
-             System.out.println(" This is a good program");
+//
+            System.out.println(steps.get(clickedItemIndex).getThumbnailURL());
+             System.out.println(steps.get(clickedItemIndex).getVideoURL());
+             System.out.println(steps.get(clickedItemIndex).getDescription());
             }
         });
         recyclerView.setAdapter(stepsAdapter);
