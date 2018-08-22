@@ -22,7 +22,6 @@ public class StepsActivityFragment extends Fragment {
     private StepsAdapter stepsAdapter;
     private String stepArray;
     private ArrayList<Steps> steps;
-    private Toolbar toolbar;
     private String recipeName;
     private CardView cardView;
     private String ingredients;
@@ -37,6 +36,8 @@ public class StepsActivityFragment extends Fragment {
         recipeName = getActivity().getIntent().getExtras().getString("name");
         ingredients = getActivity().getIntent().getExtras().getString("ingredients");
         steps = JsonUtils.parseStepsJson(stepArray);
+
+
         final View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
         getActivity().setTitle(recipeName);
         cardView = (CardView) rootView.findViewById(R.id.step_card_card);
@@ -44,20 +45,19 @@ public class StepsActivityFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+
         stepsAdapter = new StepsAdapter(steps, new ListItemClickedListener() {
             @Override
             public void onListItemClick(int clickedItemIndex) {
                 Intent intent = new Intent(getActivity(), StepsAndVideoActivity.class);
                 intent.putExtra("description", steps.get(clickedItemIndex).getDescription());
                 intent.putExtra("url", steps.get(clickedItemIndex).getVideoURL());
+                intent.putExtra("shortDescription",steps.get(clickedItemIndex).getShortDescription());
                 startActivity(intent);
-
-            System.out.println(steps.get(clickedItemIndex).getThumbnailURL());
-             System.out.println(steps.get(clickedItemIndex).getVideoURL());
-             System.out.println(steps.get(clickedItemIndex).getDescription());
             }
         });
         recyclerView.setAdapter(stepsAdapter);
+
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
