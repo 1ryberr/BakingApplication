@@ -31,15 +31,8 @@ public class StepsActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        stepArray = getActivity().getIntent().getExtras().getString("stepsArray");
-        recipeName = getActivity().getIntent().getExtras().getString("name");
-        ingredients = getActivity().getIntent().getExtras().getString("ingredients");
-        steps = JsonUtils.parseStepsJson(stepArray);
-
-
+        getData();
         final View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
-        getActivity().setTitle(recipeName);
         cardView = (CardView) rootView.findViewById(R.id.step_card_card);
         recyclerView = rootView.findViewById(R.id.step_card);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -49,6 +42,7 @@ public class StepsActivityFragment extends Fragment {
         stepsAdapter = new StepsAdapter(steps, new ListItemClickedListener() {
             @Override
             public void onListItemClick(int clickedItemIndex) {
+
                 Intent intent = new Intent(getActivity(), StepsAndVideoActivity.class);
                 intent.putExtra("description", steps.get(clickedItemIndex).getDescription());
                 intent.putExtra("url", steps.get(clickedItemIndex).getVideoURL());
@@ -69,5 +63,13 @@ public class StepsActivityFragment extends Fragment {
             }
         });
         return rootView;
+    }
+
+    private void getData() {
+        stepArray = getActivity().getIntent().getExtras().getString("stepsArray");
+        recipeName = getActivity().getIntent().getExtras().getString("name");
+        ingredients = getActivity().getIntent().getExtras().getString("ingredients");
+        steps = JsonUtils.parseStepsJson(stepArray);
+        getActivity().setTitle(recipeName);
     }
 }

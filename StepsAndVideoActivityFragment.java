@@ -31,16 +31,19 @@ public class StepsAndVideoActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        stepDescription = getActivity().getIntent().getExtras().getString("description");
-        urlString = getActivity().getIntent().getExtras().getString("url");
-        shortDescription = getActivity().getIntent().getExtras().getString("shortDescription");
-        getActivity().setTitle(shortDescription);
-
+        getData();
         final View rootView = inflater.inflate(R.layout.fragment_steps_and_video, container, false);
         playerView = (PlayerView) rootView.findViewById(R.id.playerView);
         descriptionText = (TextView) rootView.findViewById(R.id.description_text);
         descriptionText.setText(stepDescription);
         return rootView;
+    }
+
+    private void getData() {
+        stepDescription = getActivity().getIntent().getExtras().getString("description");
+        urlString = getActivity().getIntent().getExtras().getString("url");
+        shortDescription = getActivity().getIntent().getExtras().getString("shortDescription");
+        getActivity().setTitle(shortDescription);
     }
 
     @Override

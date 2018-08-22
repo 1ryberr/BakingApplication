@@ -39,7 +39,17 @@ public class RecipeCardFragment extends Fragment {
 
                              Bundle savedInstanceState) {
 
+        checkIfOnline();
+        final View rootView = inflater.inflate(R.layout.fragment_recipe_card, container, false);
+        recyclerView = rootView.findViewById(R.id.recycle_card);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        return rootView;
 
+    }
+
+    private void checkIfOnline() {
         if (isOnline()) {
             new BakingRecipeQueryTask().execute(NetworkUtils.buildUrl());
         } else {
@@ -55,15 +65,7 @@ public class RecipeCardFragment extends Fragment {
             });
             builder.show();
         }
-        final View rootView = inflater.inflate(R.layout.fragment_recipe_card, container, false);
-        recyclerView = rootView.findViewById(R.id.recycle_card);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        return rootView;
-
     }
-
 
 
     public boolean isOnline() {
