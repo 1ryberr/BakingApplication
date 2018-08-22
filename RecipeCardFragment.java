@@ -100,7 +100,7 @@ public class RecipeCardFragment extends Fragment {
                 //   builder.setMessage(R.string.error_message);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //finish();
+                        getActivity().finish();
                     }
                 });
                 builder.show();

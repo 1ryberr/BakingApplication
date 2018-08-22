@@ -49,6 +49,7 @@ public class StepsActivityFragment extends Fragment {
             public void onListItemClick(int clickedItemIndex) {
                 Intent intent = new Intent(getActivity(), StepsAndVideoActivity.class);
                 intent.putExtra("description", steps.get(clickedItemIndex).getDescription());
+                intent.putExtra("url", steps.get(clickedItemIndex).getVideoURL());
                 startActivity(intent);
 
             System.out.println(steps.get(clickedItemIndex).getThumbnailURL());
