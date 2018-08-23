@@ -19,6 +19,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
     }
 
     public RecipeAdapter(ArrayList<Recipe> recipes, ListItemClickedListener listener) {
+
         this.recipes = recipes;
         this.mOnClickListener = listener;
     }
