@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +38,20 @@ public class StepsActivityFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
+        if(rootView.findViewById(R.id.fragment_sw600_land) != null){
+            System.out.println("YO Yo YO");
+        }else{
+            System.out.println("Yo man");
+        }
+
+
+        displaySetpsAndVideo();
+        clickOnCard();
+
+        return rootView;
+    }
+
+    private void displaySetpsAndVideo() {
         stepsAdapter = new StepsAdapter(steps, new ListItemClickedListener() {
             @Override
             public void onListItemClick(int clickedItemIndex) {
@@ -51,7 +64,9 @@ public class StepsActivityFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(stepsAdapter);
+    }
 
+    private void clickOnCard() {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +77,6 @@ public class StepsActivityFragment extends Fragment {
 
             }
         });
-        return rootView;
     }
 
     private void getData() {

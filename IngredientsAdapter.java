@@ -38,7 +38,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         holder.ingredientLabel.setText(ingredients.get(position).getIngredient());
         holder.quantityLabel.setText( String.valueOf(ingredients.get(position).getQuantity()));
         holder.measure.setText(ingredients.get(position).getMeasure());
-
     }
 
     @Override
