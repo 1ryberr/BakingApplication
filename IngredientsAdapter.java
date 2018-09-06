@@ -18,7 +18,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     ArrayList<Ingredients> ingredients = new ArrayList<>();
 
 
-
     public IngredientsAdapter(ArrayList<Ingredients> ingredients) {
         this.ingredients = ingredients;
     }
@@ -32,9 +31,9 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         return viewHolder;
     }
 
-
     @Override
     public void onBindViewHolder(IngredientsAdapter.IngredientsAdapterViewHolder  holder, final int position) {
+
         holder.ingredientLabel.setText(ingredients.get(position).getIngredient());
         holder.quantityLabel.setText( String.valueOf(ingredients.get(position).getQuantity()));
         holder.measure.setText(ingredients.get(position).getMeasure());

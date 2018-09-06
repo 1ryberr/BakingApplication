@@ -1,6 +1,7 @@
 package com.example.ryanberry.bakingapplication;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -15,6 +16,7 @@ import com.example.ryanberry.bakingapplication.utilities.JsonUtils;
 import java.util.ArrayList;
 
 
+
 public class StepsActivityFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -24,6 +26,11 @@ public class StepsActivityFragment extends Fragment {
     private String recipeName;
     private CardView cardView;
     private String ingredients;
+    private String url;
+    private boolean start = false;
+
+
+
     public StepsActivityFragment() {
     }
 
@@ -38,12 +45,10 @@ public class StepsActivityFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        if(rootView.findViewById(R.id.fragment_sw600_land) != null){
-            System.out.println("YO Yo YO");
-        }else{
-            System.out.println("Yo man");
-        }
+        if(start) {
 
+
+        }
 
         displaySetpsAndVideo();
         clickOnCard();
@@ -56,11 +61,37 @@ public class StepsActivityFragment extends Fragment {
             @Override
             public void onListItemClick(int clickedItemIndex) {
 
-                Intent intent = new Intent(getActivity(), StepsAndVideoActivity.class);
-                intent.putExtra("description", steps.get(clickedItemIndex).getDescription());
-                intent.putExtra("url", steps.get(clickedItemIndex).getVideoURL());
-                intent.putExtra("shortDescription",steps.get(clickedItemIndex).getShortDescription());
-                startActivity(intent);
+                int orientation = getResources().getConfiguration().orientation;
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    if ((getResources().getConfiguration().screenLayout &
+                            Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                            Configuration.SCREENLAYOUT_SIZE_LARGE) {
+                         url= steps.get(clickedItemIndex).getVideoURL();
+                       start = true;
+
+
+
+
+                        System.out.println(url);
+
+
+                        // on a large screen device ...
+                        System.out.println("Landscape");
+                    } else {
+
+                        Intent intent = new Intent(getActivity(), StepsAndVideoActivity.class);
+                        intent.putExtra("description", steps.get(clickedItemIndex).getDescription());
+                        intent.putExtra("url", steps.get(clickedItemIndex).getVideoURL());
+                        intent.putExtra("shortDescription", steps.get(clickedItemIndex).getShortDescription());
+                        startActivity(intent);
+                    }
+                } else {
+                    Intent intent = new Intent(getActivity(), StepsAndVideoActivity.class);
+                    intent.putExtra("description", steps.get(clickedItemIndex).getDescription());
+                    intent.putExtra("url", steps.get(clickedItemIndex).getVideoURL());
+                    intent.putExtra("shortDescription", steps.get(clickedItemIndex).getShortDescription());
+                    startActivity(intent);
+                }
             }
         });
         recyclerView.setAdapter(stepsAdapter);
@@ -80,10 +111,14 @@ public class StepsActivityFragment extends Fragment {
     }
 
     private void getData() {
+
+
         stepArray = getActivity().getIntent().getExtras().getString("stepsArray");
         recipeName = getActivity().getIntent().getExtras().getString("name");
         ingredients = getActivity().getIntent().getExtras().getString("ingredients");
         steps = JsonUtils.parseStepsJson(stepArray);
         getActivity().setTitle(recipeName);
     }
+
+
 }

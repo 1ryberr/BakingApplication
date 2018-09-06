@@ -26,15 +26,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
 
     @Override
     public RecipeAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.recipe_card_item, parent, false);
         RecipeAdapterViewHolder viewHolder = new RecipeAdapterViewHolder(view);
+
         return viewHolder;
     }
 
 
     @Override
     public void onBindViewHolder(RecipeAdapterViewHolder holder, final int position) {
+
         holder.recipeLabel.setText(recipes.get(position).getName());
     }
 
@@ -44,11 +47,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
     }
 
     class RecipeAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
+
         TextView recipeLabel;
         CardView cardView;
 
         public RecipeAdapterViewHolder(View itemView) {
             super(itemView);
+
             recipeLabel = (TextView) itemView.findViewById(R.id.recipe_name);
             cardView = (CardView) itemView.findViewById(R.id.card);
             itemView.setOnClickListener(this);

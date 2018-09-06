@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.example.ryanberry.bakingapplication.model.Steps;
+
 import java.util.ArrayList;
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapterViewHolder> {
@@ -21,7 +23,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
     }
 
     public StepsAdapter(ArrayList<Steps> steps, ListItemClickedListener listener) {
-        this.steps =steps;
+        this.steps = steps;
         this.mOnClickListener = listener;
     }
 
@@ -48,15 +50,15 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsAdapter
         return steps.size();
     }
 
-    class StepsAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
+    class StepsAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView stepLabel;
-        TextView  number;
+        TextView number;
         CardView cardView;
 
         public StepsAdapterViewHolder(View itemView) {
             super(itemView);
             stepLabel = (TextView) itemView.findViewById(R.id.step_name);
-            number =(TextView) itemView.findViewById(R.id.number);
+            number = (TextView) itemView.findViewById(R.id.number);
             cardView = (CardView) itemView.findViewById(R.id.step_card);
             itemView.setOnClickListener(this);
         }

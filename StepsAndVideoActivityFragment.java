@@ -17,7 +17,7 @@ import com.google.android.exoplayer2.util.Util;
 
 
 public class StepsAndVideoActivityFragment extends Fragment {
-    private TextView descriptionText;
+    public TextView descriptionText;
     private String stepDescription;
     private PlayerView playerView;
     private SimpleExoPlayer mExoPlayer;
@@ -49,6 +49,18 @@ public class StepsAndVideoActivityFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        videoPlayer(urlString);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        playerView.setPlayer(null);
+        mExoPlayer.release();
+        mExoPlayer = null;
+    }
+
+    public void videoPlayer(String urlString) {
 
         mExoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), new DefaultTrackSelector());
         playerView.setPlayer(mExoPlayer);
@@ -63,13 +75,5 @@ public class StepsAndVideoActivityFragment extends Fragment {
             mExoPlayer.prepare(mediaSource);
             mExoPlayer.setPlayWhenReady(true);
         }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        playerView.setPlayer(null);
-        mExoPlayer.release();
-        mExoPlayer = null;
     }
 }

@@ -125,7 +125,6 @@ public class RecipeCardFragment extends Fragment {
                             String steps = recipe.get(clickedItemIndex).getSteps();
                             String ingredients = recipe.get(clickedItemIndex).getIngredients();
                             String name = recipe.get(clickedItemIndex).getName();
-
                             Intent intent = new Intent(getActivity(), StepsActivity.class);
                             intent.putExtra("stepsArray", steps);
                             intent.putExtra("name", name);
